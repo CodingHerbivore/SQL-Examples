@@ -1,0 +1,19 @@
+1. Get all products ordered by 30019 Matthew J. Miller
+
+SELECT prd.ProductNumber, prd.Name, sod.OrderQty
+FROM SalesLT.Product prd
+JOIN SalesLT.SalesOrderDetail sod
+ON sod.ProductID = prd.ProductID
+JOIN SalesLT.SalesOrderHeader soh
+ON soh.SalesOrderID = sod.SalesOrderID
+JOIN SalesLT.Customer cus
+ON soh.CustomerID = cus.CustomerID
+WHERE cus.CustomerID = 30019
+
+2. Get total due by June 20, 2008 from each customer that owes the store
+
+SELECT cus.CustomerID, cus.FirstName, cus.MiddleName, cus.LastName, soh.TotalDue
+FROM SalesLT.Customer cus
+RIGHT JOIN SalesLT.SalesOrderHeader soh
+ON cus.CustomerID = soh.CustomerID
+WHERE soh.DueDate < '2008-06-20'
